@@ -1,4 +1,13 @@
-import { Menu, Youtube, Upload, Bell, User, Mic, Search } from "lucide-react";
+import {
+  Menu,
+  Youtube,
+  Upload,
+  Bell,
+  User,
+  Mic,
+  Search,
+  ArrowLeft,
+} from "lucide-react";
 import { Button } from "../components/Button";
 import { useState } from "react";
 
@@ -29,13 +38,19 @@ export function PageHeader() {
           </a>
         </div>
         <form
-          onSubmit={(e) => {
-            e.preventDefault();
-          }}
           className={`gap-4 flex-grow justify-center ${
             showFullWidthSearch ? "flex" : "hidden md:flex "
           }`}
         >
+          <Button
+            onClick={() => setShowFullWidthSearch(false)}
+            type="button"
+            variant="ghost"
+            size="icon"
+            className="flex-shrink-0"
+          >
+            <ArrowLeft />
+          </Button>
           <div className="flex flex-grow max-w-[600px]">
             <input
               type="search"
