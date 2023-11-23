@@ -1,3 +1,6 @@
+import { formatDuration } from "../utils/formatDuration";
+import { formatTimeAgo } from "../utils/formatTimeAgo";
+
 type VideoGridItemProps = {
   id: string;
   title: string;
@@ -8,9 +11,14 @@ type VideoGridItemProps = {
   };
   views: number;
   postedAt: Date;
+  duration: number;
   thumbnailUrl: string;
   videoUrl: string;
 };
+
+const VIEW_FORMATTER = new Intl.NumberFormat(undefined, {
+  notation: "compact",
+});
 
 export function VideoGridItem({
   id,
@@ -18,6 +26,7 @@ export function VideoGridItem({
   channel,
   views,
   postedAt,
+  duration,
   thumbnailurl,
   videoUrl,
 }: VideoGridItemProps) {
@@ -30,9 +39,28 @@ export function VideoGridItem({
             className="block w-full h-full object-cover rounded-xl"
           />
           <div className="absolute bottom-1 right-1 bg-secondary-dark text-sm px-.5 rounded">
-            {duration}
+            {formatDuration(duration)}
           </div>
         </a>
+        <div className="flex gap-2 ">
+          <a href={`/@${channel.id}`} className="flex-shrink-0">
+            <img className="w-12 h-12 rounded-full" src={channel.profileUrl} />
+          </a>
+          <div className="flex flex-col">
+            <a href={`/watch?v=${id}`} className="font-bold">
+              {title}
+            </a>
+            <a
+              href={`/@${channel.id}`}
+              className=" text-secondary-text text-sm"
+            >
+              {channel.name}
+            </a>
+            <div className="text-secondary-text text-sm">
+              {VIEW_FORMATTER.format(views)} views • {formatTimeAgo(postedAt)}
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
