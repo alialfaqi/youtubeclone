@@ -1,9 +1,7 @@
 import { Clapperboard, Home, Library, Repeat } from "lucide-react";
-import { ElementType, ReactNode } from "react";
+import { ElementType } from "react";
 import { Button, buttonStyles } from "../components/Button";
 import { twMerge } from "tailwind-merge";
-import { useState } from "react";
-import React from "react";
 
 export function Sidebar() {
   return (
