@@ -1,5 +1,5 @@
 import { Clapperboard, Home, Library, Repeat } from "lucide-react";
-import { ElementType } from "react";
+import { ElementType, ReactNode } from "react";
 import { Button, buttonStyles } from "../components/Button";
 import { twMerge } from "tailwind-merge";
 import { useState } from "react";
@@ -18,9 +18,10 @@ export function Sidebar() {
         />
         <SmallSidebarItem Icon={Library} title="library" url="/library" />
       </aside>
-      <aside className="w-56 lg:sticky absolute top-0 overflow-y-auto scrollbar-hidden pb-4 flex-col gap-2">
-        <LargeSidebarSection visibleItemCount={1}>
+      <aside className="w-56 hidden  lg:sticky absolute top-0 overflow-y-auto scrollbar-hidden pb-4 lg:flex flex-col gap-2 px-2">
+        <LargeSidebarSection visibleItemCount={2}>
           <LargeSidebarItem isActive Icon={Home} title="Home" url="/" />
+          <LargeSidebarItem Icon={Home} title="Home" url="/" />
         </LargeSidebarSection>
       </aside>
     </>
@@ -65,18 +66,15 @@ function LargeSidebarSection({
   const childrenArray = React.Children.toArray(children).flat();
   const showExpandButton = childrenArray.length > visibleItemCount;
   const visibleChildren = childrenArray.slice(0, visibleItemCount);
+
   return (
-    <>
-      <div>
-        {title && <div className="ml-4 mt-2 text-lg mb-1">{title}</div>}
-        {visibleChildren}
-        {/* {showExpandButton && 
-          <Button variant="ghost" className=""> <Button/> 
-        } */}
-      </div>
-    </>
+    <div>
+      {title && <div className="ml-4 mt-2 text-lg mb-1">{title}</div>}
+      {visibleChildren}
+    </div>
   );
 }
+
 type LargeSidebarItemProps = {
   Icon: ElementType;
   title: string;
