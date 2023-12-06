@@ -10,9 +10,11 @@ import {
 } from "lucide-react";
 import { Button } from "../components/Button";
 import { useState } from "react";
+import { useSidebarContext } from "../context/SidebarContext";
 
 export function PageHeader() {
   const [showFullWidthSearch, setShowFullWidthSearch] = useState(false);
+  const { toggle } = useSidebarContext();
 
   return (
     <>
@@ -22,7 +24,7 @@ export function PageHeader() {
             showFullWidthSearch ? "hidden" : "flex"
           }`}
         >
-          <Button variant="ghost" size="icon" className="bg-red-500">
+          <Button onClick={toggle} variant="ghost" size="icon">
             <Menu />
           </Button>
           <a href="/">
