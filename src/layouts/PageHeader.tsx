@@ -19,26 +19,7 @@ export function PageHeader() {
   return (
     <>
       <div className="flex justify-between gap-10 lg:gap-20 pt-2 mb-6 mx-4">
-        <div
-          className={` items-center flex-shrink-0 gap-4 ${
-            showFullWidthSearch ? "hidden" : "flex"
-          }`}
-        >
-          <Button onClick={toggle} variant="ghost" size="icon">
-            <Menu />
-          </Button>
-          <a href="/">
-            <div className="flex justify-between items-center">
-              <Youtube className="text-red-600" />
-              <p>
-                <span className=" text-red-600 font-semibold text-xl">You</span>
-                <span className=" text-slate-400 font-semibold  text-xl">
-                  Tube
-                </span>
-              </p>
-            </div>
-          </a>
-        </div>
+        <PageHeaderFirstSection hidden={showFullWidthSearch} />
         <form
           className={`gap-4 flex-grow justify-center ${
             showFullWidthSearch ? "flex" : "hidden md:flex "
@@ -96,5 +77,35 @@ export function PageHeader() {
         </div>
       </div>
     </>
+  );
+}
+
+type PageHeaderFirstSectionProps = {
+  hidden?: boolean;
+};
+
+export function PageHeaderFirstSection({
+  hidden = false,
+}: PageHeaderFirstSectionProps) {
+  const { toggle } = useSidebarContext();
+  return (
+    <div
+      className={` items-center flex-shrink-0 gap-4 ${
+        hidden ? "hidden" : "flex"
+      }`}
+    >
+      <Button onClick={toggle} variant="ghost" size="icon">
+        <Menu />
+      </Button>
+      <a href="/">
+        <div className="flex justify-between items-center">
+          <Youtube className="text-red-600" />
+          <p>
+            <span className=" text-red-600 font-semibold text-xl">You</span>
+            <span className=" text-slate-400 font-semibold  text-xl">Tube</span>
+          </p>
+        </div>
+      </a>
+    </div>
   );
 }
